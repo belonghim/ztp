@@ -1,0 +1,65 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "sno1"
+  namespace: "sno1"
+spec:
+  baseDomain: "kvm.local"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "openshift-4.12.11.0"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4KSfBG6mnUOffnitF9rAXH5t4sJuX4X5HICMc7t7JdAdHoz4Q6MfAX2vWCsjiTJ4SGvrkaaDatPbrNCMxCmEuQ8wo+5+udqS1faIHJuZdiMInGpMsdc0GRd789zLQf3cvO7divmT5Enp9lvQwKLh4ZoZ19dowa7IVQOD1xZ06iSS2MViuGXkxjXpOa/Gl6hYPoeYWEcKTJCq5vqca6D3WVQ8yJw4xglQuE1ruqyaNlSp1A4AcugM1CRheFFrqF7UI6jwn9d/MnCjAV5QotJqh+5Sm6nM/bxt+uDsqQX0rPVvfRlL1DzrVy3WGtw8xOn0f6rqfl1oTQzKsRWfEkq4JngPKlMgDLDIJgchjDUgO5YacKIOT15LSmlFN75iycrbu0RkKq3aX8pqSB+245neeACdBulEPv9Efn6Q034Lc/IqsMYw718RCgZ1HFc80Ld56cHja1kyKcKwqaFn+dZcTxKssf8ZFo8r3TfMX/xiz0sTPEfuEewxfCkcgniSUEC1h9Eguwedzg9SkAbYE08OPHre4EvnwqwdQyRKF+Yx3a8ynqwvMKiuozzbaKgYveHBp5Zi/H1MycvFNYzG71NwAP8GkKSTflj7IcFXEUWp/fBgH9NuXPn13QDFCR5a/TOlcNqJCPIej/OybWWtkhDM48GRyL/QR2cs5M8wPFqCmUQ== root@test03.gpskr.local"
+  clusters:
+  - clusterName: "sno1"
+    networkType: "OVNKubernetes"
+    clusterLabels:
+      common: true
+      group-du-sno: ""
+      sites : "sno2"
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    machineNetwork:
+    - cidr: 192.168.20.0/24
+    serviceNetwork:
+    - 172.30.0.0/16
+    ignitionConfigOverride: '{"ignition": {"version": "3.2.0"}, "storage": {"files": [{"overwrite": true, "path": "/etc/containers/policy.json", "contents": {"source":"data:text/plain;base64,ewogICAgImRlZmF1bHQiOiBbCiAgICAgICAgewogICAgICAgICAgICAidHlwZSI6ICJpbnNlY3VyZUFjY2VwdEFueXRoaW5nIgogICAgICAgIH0KICAgIF0sCiAgICAidHJhbnNwb3J0cyI6CiAgICAgICAgewogICAgICAgICAgICAiZG9ja2VyLWRhZW1vbiI6CiAgICAgICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAgICAgIiI6IFt7InR5cGUiOiJpbnNlY3VyZUFjY2VwdEFueXRoaW5nIn1dCiAgICAgICAgICAgICAgICB9CiAgICAgICAgfQp9Cgo="}}]}}'
+    nodes:
+    - hostName: "node.sno1.kvm.local"
+      role: "master"
+      bmcAddress: "redfish-virtualmedia+http://192.168.20.1:8000/redfish/v1/Systems/b3b3e9c5-2d51-49d8-903f-2ee45960b203"
+      bmcCredentialsName:
+        name: "sno1-bmc-secret"
+      bootMACAddress: "00:ef:41:21:e1:a1"
+      bootMode: "UEFI"
+      rootDeviceHints:
+        deviceName: "/dev/vda"
+      nodeNetwork:
+        interfaces:
+        - name: enp1s0
+          macAddress: "00:ef:41:21:e1:a1"
+        config:
+          interfaces:
+          - name: enp1s0
+            type: ethernet
+            state: up
+            macAddress: "00:ef:41:21:e1:a1"
+            ipv4:
+              enabled: true
+              address:
+              - ip: 192.168.20.50
+                prefix-length: 24
+              dhcp: false
+            ipv6:
+              enabled: false
+            mtu: 9000
+          dns-resolver:
+            config:
+              server:
+              - 192.168.20.100
+          routes:
+            config:
+            - destination: 0.0.0.0/0
+              next-hop-address: 192.168.20.1
+              next-hop-interface: enp1s0
+              table-id: 254
