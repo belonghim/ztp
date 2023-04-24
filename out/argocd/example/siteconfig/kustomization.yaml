@@ -3,3 +3,4 @@ kind: Kustomization
 
 generators:
 - site-sno1.yaml
+- site-sno23.yaml
