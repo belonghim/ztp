@@ -4,3 +4,7 @@ kind: Kustomization
 generators:
 - site-sno1.yaml
 - site-sno23.yaml
+
+resources:
+- sno23-secret.yaml
+
