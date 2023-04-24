@@ -3,6 +3,10 @@ kind: Kustomization
 
 generators:
 - site-sno1.yaml
+- site-sno2.yaml
+- site-sno3.yaml
 
 resources:
+- sno2-secret.yaml
+- sno3-secret.yaml
 
