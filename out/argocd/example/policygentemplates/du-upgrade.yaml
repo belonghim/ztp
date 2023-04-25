@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "du-upgrade"
+  namespace: "ztp-group"
+spec:
+  bindingRules:
+    group-du-sno: ""
+  mcp: "master"
+  remediationAction: inform
+  sourceFiles:
+    - fileName: ImageSignature.yaml 
+      policyName: "platform-upgrade-prep"
+      binaryData:
+        sha256-157cc02d63bfe67988429fd803da632e495e230d811759b1aed1e6ffa7a3f31a: owGbwMvMwMEoOU9/4l9n2UDGtYwpSWLxRQW5xZnpukWphbre7h7uOX56SZl5KQ6iGdVKyUWZJZnJiTlKVgrVSpm5iempYFZKfnJ2apFubmJeZlpqcYluSmY6kAJKKRVnJBqZmlkZmponJxsYpZgZJ6WlmplbWliYGFmmpVgYGKckmhkbpZpYmqYaGRukWBgamptaJhkmpqYYppqlpSWaJxqnGRsmKtXqKCiVVBaArFNKLMnPzUxWSM7PK0nMzEstUgC6Ni+xpLQoVQmoKjMlNa8ks6QS2WFFqWmpRal5yWDthaWJlXqZ+fr5Bal5xRmZaSVA6ZzUxOJU3ZTUMv385AIY38pEz9BIz9BEt8LCLN7MRKkW5Ij8gpLM/DxoCCQXpQIdUwQyNSg1RcEjsUTBH2hqMMhUhWCgqzLz0hUcS0sy8oHhVqlgoGegZwg0ppNJlJmVARSi8JDnEJfm/184OT1Q7d/xtBzl9IT3JX7Cmez8IX9+Zvsdq/6+xdTS/Ff2XZNFAjo75304MbPhl8f7qQHXA+TP7fY+rzX9vrvMsU0fXnv16R2b2sCm/eDN4f0rPj+ftdO9TD5k/bPnPQVb3rNduS1iNE1yRyILr1HkgsjMzbNn8E2o/R+Zs6d3+jr2Bw5ltt9Xnl22c53flXNXSxpCtuUwT5u94erChNfT1q6+scSiefkFy/rVoYYB8r6O+kdSO0XKJr9c8GlltMxttTl59XwTrNlf3r/F8StnEbvddf7aE79PyZj5/Jyn9FmibeOyLyIen2b962jntvVj+ykdoF1zbVaZ9fflp2+2iD2Yp6qi4Dt1TkWfqvJHtu2/FXT2tBtu1P7xpK7f98v3GxfalmWVR+nd2B68dNb/m5UWR/SyZSzX67bzbUz5P0U/Wsfn1Xeu075cmpWqPmZ8f8pWeARs7l7RIMdl/FWz4Wz31IaW9977Dz9hUjh8duYtl5jAgGrN8NajU3ycdl1RZmAVyjnBI3fhhT5XRMI3k7Ibv+cVtzYoNZmF/8g4y7/snfJSxm9Bu22O+glPVf+oLuOSo+a92URCckr/P61TJRszWVUkLi3XaJzx5OmUMGG9p+tsTobxTwqS7xfnf8dwwi3y8H/eTjOew8c52PZUze3sipUwyz31a8VCh46PB05/EpN7KRy2YbdW0I3y0oz5k64uX7VmauC5fbcA 
+    - fileName: DisconnectedICSP.yaml
+      policyName: "platform-upgrade-prep"
+      metadata:
+        name: disconnected-internal-icsp-for-ocp
+      spec:
+        repositoryDigestMirrors: 
+          - mirrors:
+            - bastion.kvm.local:5000/ocp412/openshift14
+            source: quay.io/openshift-release-dev/ocp-release
+          - mirrors:
+            - bastion.kvm.local:5000/ocp412/openshift14
+            source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+    - fileName: ClusterVersion.yaml 
+      policyName: "platform-upgrade-prep"
+      metadata:
+        name: version
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "1"
+      spec:
+        channel: "fast-4.12"
+        upstream: http://bastion.kvm.local:8080/images/upgrade-graph_fast-4.12
+        desiredUpdate:
+          image: bastion.kvm.local:5000/ocp412/openshift14@sha256:157cc02d63bfe67988429fd803da632e495e230d811759b1aed1e6ffa7a3f31a
+    - fileName: ClusterVersion.yaml 
+      policyName: "platform-upgrade"
+      metadata:
+        name: version
+      spec:
+        channel: "fast-4.12"
+        upstream: http://bastion.kvm.local:8080/images/upgrade-graph_fast-4.12
+        desiredUpdate:
+          image: bastion.kvm.local:5000/ocp412/openshift14@sha256:157cc02d63bfe67988429fd803da632e495e230d811759b1aed1e6ffa7a3f31a
+      status:
+        history:
+          - image: bastion.kvm.local:5000/ocp412/openshift14@sha256:157cc02d63bfe67988429fd803da632e495e230d811759b1aed1e6ffa7a3f31a
+            state: "Completed"

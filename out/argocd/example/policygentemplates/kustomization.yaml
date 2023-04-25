@@ -1,4 +1,5 @@
 generators:
+- du-upgrade.yaml
 # This is common to all RAN deployments
 - common-ranGen.yaml
 # This group policy is for all single-node deployments:
