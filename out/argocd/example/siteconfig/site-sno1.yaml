@@ -19,7 +19,7 @@ spec:
     installConfigOverrides:  "{\"capabilities\":{\"baselineCapabilitySet\": \"None\", \"additionalEnabledCapabilities\": [ \"NodeTuning\" ] }}"
     # It is strongly recommended to include crun manifests as part of the additional install-time manifests for 4.13+.
     # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.sno-extra-manifest.
-    extraManifestPath: sno-extra-manifest
+    #extraManifestPath: sno-extra-manifest
     clusterNetwork:
     - cidr: 10.128.0.0/14
       hostPrefix: 23
