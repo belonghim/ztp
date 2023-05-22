@@ -7,7 +7,7 @@ spec:
   baseDomain: "kvm.local"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "openshift-4.12.11.0"
+  clusterImageSetNameRef: "openshift-4.13.0.0"
   sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4KSfBG6mnUOffnitF9rAXH5t4sJuX4X5HICMc7t7JdAdHoz4Q6MfAX2vWCsjiTJ4SGvrkaaDatPbrNCMxCmEuQ8wo+5+udqS1faIHJuZdiMInGpMsdc0GRd789zLQf3cvO7divmT5Enp9lvQwKLh4ZoZ19dowa7IVQOD1xZ06iSS2MViuGXkxjXpOa/Gl6hYPoeYWEcKTJCq5vqca6D3WVQ8yJw4xglQuE1ruqyaNlSp1A4AcugM1CRheFFrqF7UI6jwn9d/MnCjAV5QotJqh+5Sm6nM/bxt+uDsqQX0rPVvfRlL1DzrVy3WGtw8xOn0f6rqfl1oTQzKsRWfEkq4JngPKlMgDLDIJgchjDUgO5YacKIOT15LSmlFN75iycrbu0RkKq3aX8pqSB+245neeACdBulEPv9Efn6Q034Lc/IqsMYw718RCgZ1HFc80Ld56cHja1kyKcKwqaFn+dZcTxKssf8ZFo8r3TfMX/xiz0sTPEfuEewxfCkcgniSUEC1h9Eguwedzg9SkAbYE08OPHre4EvnwqwdQyRKF+Yx3a8ynqwvMKiuozzbaKgYveHBp5Zi/H1MycvFNYzG71NwAP8GkKSTflj7IcFXEUWp/fBgH9NuXPn13QDFCR5a/TOlcNqJCPIej/OybWWtkhDM48GRyL/QR2cs5M8wPFqCmUQ== root@test03.gpskr.local"
   clusters:
   - clusterName: "sno1"
@@ -15,7 +15,7 @@ spec:
     clusterLabels:
       common: true
       group-du-sno: ""
-      sites : "sno2"
+      sites : "sno1"
     clusterNetwork:
     - cidr: 10.128.0.0/14
       hostPrefix: 23
