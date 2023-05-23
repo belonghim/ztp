@@ -16,7 +16,7 @@ spec:
       common: true
       group-du-sno: ""
       sites : "sno1"
-    installConfigOverrides:  "{\"capabilities\":{\"baselineCapabilitySet\": \"None\", \"additionalEnabledCapabilities\": [ \"NodeTuning\" ] }}"
+    installConfigOverrides:  "{\"capabilities\":{\"baselineCapabilitySet\": \"None\", \"additionalEnabledCapabilities\": [ \"Console\", \"Storage\" ] }}"
     # It is strongly recommended to include crun manifests as part of the additional install-time manifests for 4.13+.
     # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.sno-extra-manifest.
     #extraManifestPath: sno-extra-manifest
