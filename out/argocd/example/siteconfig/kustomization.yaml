@@ -2,12 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 generators:
-#- site-sno1.yaml
+- site-sno1.yaml
 #- site-sno2.yaml
 #- site-sno3.yaml
 
 resources:
-#- sno1-secret.yaml
+- sno1-secret.yaml
 #- sno2-secret.yaml
 #- sno3-secret.yaml
 
